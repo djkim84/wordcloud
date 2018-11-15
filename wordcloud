@@ -7,7 +7,7 @@ library(KoNLP)
 library(wordcloud)
 useSejongDic()
 
-data1<-readlines("bitcoin2.txt")
+data1<-readLines("bitcoin2.txt")
 data2<-sapply(data1,extractNoun,USE.NAMES=F)
 
 
