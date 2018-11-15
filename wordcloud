@@ -1,0 +1,36 @@
+
+
+install.packages('KoNLP')
+install.packages('wordcloud')
+
+library(KoNLP)
+library(wordcloud)
+useSejongDic()
+
+data1<-readlines("bitcoin2.txt")
+data2<-sapply(data1,extractNoun,USE.NAMES=F)
+
+
+data3<-unlist(data2)
+
+data3<-Filter(function(x){nchar(x)>=2}, data3)
+
+
+data3<-gsub("\\d+", "", data3)
+data3<-gsub("\\(","",data3)
+data3<-gsub("\\)","",data3)
+data3<-gsub("[A-Za-z]","",data3)
+
+
+
+write(unlist(data3), "cloudcomputing2.txt")
+data4<-read.table("cloudcomputing2.txt")
+
+wordcount<-table(data4)
+
+wordcount
+
+library(RColorBrewer)
+palete<-brewer.pal(9,"Set1")
+wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.1)
+
